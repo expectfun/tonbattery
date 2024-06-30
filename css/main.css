@@ -1,0 +1,225 @@
+* {
+  box-sizing: border-box;
+  color: var(--text-color);
+}
+
+:root {
+  --background-color: #fff;
+  --text-color: #111;
+  background-color: var(--background-color);
+}
+
+body {
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  margin: 0;
+}
+
+header {
+  position: sticky;
+  top: 0px;
+  padding: 0.2em 0;
+  background-color: var(--background-color);
+  box-shadow: hsla(0 0% 0% / calc(min(var(--scroll-pos) / 100, 0.1))) 0 0.5rem 1rem;
+  transition: box-shadow 200ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+.head {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+header h1 {
+  margin: 0.4em 0.7em;
+  padding: 0 3em 0.2em;
+}
+
+h1, h2 {
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+img {
+  box-shadow: hsla(0 0% 0% / 0.25) 0 0.5rem 1rem;
+}
+
+.toggles {
+  position: absolute;
+  height: 24px;
+  left: 20px;
+  top: 0px;
+  bottom: 0px;
+  margin: auto;
+  display: flex;
+  gap: 9px;
+  opacity: 0.6;
+}
+:root.is-light .toggles .icon-light {
+  display: none;
+}
+:root.is-dark .toggles .icon-dark {
+  display: none;
+}
+#scheme-toggle {
+  cursor: pointer;
+}
+
+.battery {
+  position: absolute;
+  border: 3px solid #3E4651;
+  width: 60px;
+  height: 40px;
+  top: 0px;
+  bottom: 0px;
+  right: 18px;
+  margin: auto;
+  border-radius: 9px;
+  z-index: -1;
+}
+.battery-lightning {
+  --text-color: #69C989;
+  mix-blend-mode: plus-lighter;
+  position: relative;
+  width: 15px;
+  top: 6px;
+  z-index: 1;
+}
+
+.battery::before {
+  --pad: 2px;
+  content: '';
+  position: absolute;
+  top: var(--pad);
+  left: var(--pad);
+  bottom: var(--pad);
+  width: calc(var(--scroll-pos) * 1% - var(--pad) * 2);
+  background-color: #63ACF0;
+  border-radius: 4px;
+}
+.battery::after {
+  content: '';
+  position: absolute;
+  background-color: #3E4651;
+  height: 10px;
+  width: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  top: 0px;
+  bottom: 0px;
+  right: -8px;
+  margin: auto;
+}
+
+article {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+article > p, article > ul {
+  max-width: 640px;
+}
+
+p, ul, figure {
+  margin: 0 0 1em;
+}
+
+figure {
+  display: flex;
+  align-items: flex-start;
+}
+
+figure.full-width {
+  margin-top: 0.5em;
+  flex-direction: column;
+  align-items: center;
+}
+
+figure.full-width img {
+  max-width: 100%;
+  margin-bottom: 1em;
+  height: auto;
+}
+
+figure.full-width figcaption {
+  text-align: center;
+  max-width: 440px;
+  font-weight: 500;
+  font-style: italic;
+}
+
+figure.right-side {
+  flex-direction: row-reverse;
+}
+
+figure.right-side img {
+  width: 40%;
+  margin-left: 1em;
+}
+
+figure.right-side figcaption {
+  margin-right: auto;
+}
+
+@media (max-width: 800px) {
+  header h1 {
+    padding-left: 1.1em;
+    text-align: left;
+    font-size: 24px;
+  }
+  .toggles {
+    gap: 2px;
+    left: 9px;
+    height: 54px;
+    flex-direction: column;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  article > p, article > ul {
+    max-width: 100%;
+  }
+  figure.right-side {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  
+  figure.right-side img {
+    width: 80%;
+  }
+}
+
+:root.is-dark {
+  --background-color: #11151E;
+  --text-color: #D2D5DA;
+}
+:root.is-dark h1, :root.is-dark h2 {
+  color: #fff;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+}
+:root.is-dark header {
+  box-shadow: hsla(0 0% 0% / calc(min(var(--scroll-pos) / 50, 0.2))) 0 0.5rem 1rem;
+}
+:root.is-dark img {
+  box-shadow: hsla(0 0% 0% / 0.4) 0 0.5rem 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.is-light) {
+    --background-color: #11151E;
+    --text-color: #D2D5DA;
+  }
+  :root:not(.is-light) h1, :root:not(.is-light) h2 {
+    color: #fff;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+  }
+  :root:not(.is-light) header {
+    box-shadow: hsla(0 0% 0% / calc(min(var(--scroll-pos) / 50, 0.2))) 0 0.5rem 1rem;
+  }
+  :root:not(.is-light) img {
+    box-shadow: hsla(0 0% 0% / 0.4) 0 0.5rem 1rem;
+  }
+}
+
